@@ -11,12 +11,12 @@ module.exports = [
     menuName: "About",
     routePath: "/about",
   },
-  {
-    id: 3,
-    icon: "/img/svg/setting.svg",
-    menuName: "Services",
-    routePath: "/services",
-  },
+  // {
+  //   id: 3,
+  //   icon: "/img/svg/setting.svg",
+  //   menuName: "Services",
+  //   routePath: "/services",
+  // },
   {
     id: 4,
     icon: "/img/svg/briefcase.svg",
