@@ -8,12 +8,16 @@ import "aos/dist/aos.css";
 import { SanityLive } from "@/sanity/lib/live";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
+import Sidebar from "@/components/Sidebar";
 
 export default async function FrontendLayout({ children }: PropsWithChildren) {
   return (
     <>
       <div className="tokyo_tm_all_wrap">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Sidebar />
+          {children}
+        </Providers>
         <SanityLive />
         {(await draftMode()).isEnabled && (
           <>

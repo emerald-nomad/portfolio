@@ -1,5 +1,4 @@
 import Home from "@/components/Home";
-import Sidebar from "@/components/Sidebar";
 import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 
@@ -8,7 +7,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <Sidebar />
       <div className="rightpart">
         <div className="rightpart_in">
           <div className="tokyo_tm_section">

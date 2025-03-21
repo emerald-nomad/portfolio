@@ -14,8 +14,8 @@ module.exports = [
   {
     id: 3,
     icon: "/img/svg/setting.svg",
-    menuName: "Service",
-    routePath: "/service",
+    menuName: "Services",
+    routePath: "/services",
   },
   {
     id: 4,
