@@ -1,40 +1,42 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-import Modal from "react-modal";
-import newsData from "../data/newsData";
-import ShareSocial from "./ShareSocial";
+import React from "react";
 import Link from "next/link";
+import { POSTS_QUERYResult } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 // Modal.setAppElement("#__next");
 
-const Posts = () => {
-  const [singleData, setSingleData] = useState({
-    img: "",
-    date: "",
-    poster: "",
-    title: "",
-    descriptions: <></>,
-  });
-  const [isOpen, setIsOpen] = useState(false);
+interface PostsProps {
+  posts: POSTS_QUERYResult;
+}
 
-  const handleblogsData = (id: number) => {
-    const find = newsData.find((item) => item?.id === id);
-    setSingleData(find!);
-    setIsOpen(true);
-  };
+const Posts = ({ posts }: PostsProps) => {
+  // const [singleData, setSingleData] = useState({
+  //   img: "",
+  //   date: "",
+  //   poster: "",
+  //   title: "",
+  //   descriptions: <></>,
+  // });
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const handleModle = (id: number) => {
-    handleblogsData(id);
-  };
+  // const handleblogsData = (id: number) => {
+  //   const find = newsData.find((item) => item?.id === id);
+  //   setSingleData(find!);
+  //   setIsOpen(true);
+  // };
+
+  // const handleModle = (id: number) => {
+  //   handleblogsData(id);
+  // };
 
   return (
     <>
       <ul>
-        {newsData.map((item) => (
-          <li key={item.id}>
+        {posts.map((post) => (
+          <li key={post._id}>
             <Link
-              href="/posts/1"
+              href={`/posts/${post.slug?.current}`}
               className="list_inner"
               // onClick={() => handleModle(item?.id)}
             >
@@ -42,7 +44,7 @@ const Posts = () => {
                 <div
                   className="main "
                   style={{
-                    backgroundImage: `url(${item.img})`,
+                    backgroundImage: `url(${urlFor(post.hero!.asset!).url()})`,
                   }}
                 ></div>
               </div>
@@ -50,13 +52,13 @@ const Posts = () => {
               <div className="details">
                 <div className="extra">
                   <p className="date">
-                    By <a href="#">{item.poster}</a>
-                    <span>{item.date}</span>
+                    {/* By <a href="#">{item.poster}</a> */}
+                    <span>{post.publishedAt}</span>
                   </p>
                 </div>
                 {/* END EXTRA */}
 
-                <h3 className="title">{item.title}</h3>
+                <h3 className="title">{post.title}</h3>
                 <div className="tokyo_tm_read_more">
                   <div className="read-more">
                     <span>Read More</span>
@@ -72,63 +74,7 @@ const Posts = () => {
         {/* END SINGLE BLOG */}
       </ul>
       {/* START MODAL */}
-      <Modal
-        isOpen={isOpen}
-        ariaHideApp={false}
-        onRequestClose={() => setIsOpen(false)}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        <div className="tokyo_tm_modalbox_news">
-          <button className="close-modal" onClick={() => setIsOpen(false)}>
-            <Image
-              width={45}
-              height={45}
-              src="/img/svg/cancel.svg"
-              alt="close icon"
-            />
-          </button>
-          {/* END CLOSE ICON */}
 
-          <div className="box_inner">
-            <div className="description_wrap scrollable">
-              <div className="image">
-                <div
-                  className="main"
-                  style={{
-                    backgroundImage: `url(${singleData?.img})`,
-                  }}
-                ></div>
-              </div>
-              {/* END IMAGE */}
-              <div className="details">
-                <div className="extra">
-                  <p className="date">
-                    By <a href="#">{singleData?.poster}</a>
-                    <span>{singleData?.date}</span>
-                  </p>
-                </div>
-                <h3 className="title">{singleData?.title}</h3>
-              </div>
-              {/* END DETAILS */}
-              <div className="main_content ">
-                {singleData?.descriptions}
-                {/* END DESCRIPTION */}
-                <div className="news_share">
-                  <span>Share:</span>
-                  <ShareSocial />
-                  {/* END SOCIAL SHARE */}
-                </div>
-                {/* END NEWS SHARE */}
-              </div>
-            </div>
-          </div>
-          {/* END BOX INNER */}
-        </div>
-        {/* END MODALBOX NEWS */}
-      </Modal>
       {/* END MODAL */}
     </>
   );

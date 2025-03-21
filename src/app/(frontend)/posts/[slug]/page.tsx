@@ -1,7 +1,28 @@
 import ShareSocial from "@/components/ShareSocial";
-import Image from "next/image";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { components } from "@/sanity/portableTextComponents";
+import { PortableText } from "next-sanity";
 
-export default async function Post() {
+export async function generateStaticParams() {
+  const posts = await client.fetch(POSTS_SLUGS_QUERY);
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default async function Post({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const { data } = await sanityFetch({ query: POST_QUERY, params: { slug } });
+
   return (
     <div className="container">
       <div className="tokyo_tm_modalbox_news">
@@ -14,7 +35,7 @@ export default async function Post() {
               <div
                 className="main"
                 style={{
-                  backgroundImage: `url(${"/img/news/2.jpg"})`,
+                  backgroundImage: `url(${urlFor(data!.hero!.asset!).url()})`,
                 }}
               ></div>
             </div>
@@ -26,14 +47,13 @@ export default async function Post() {
                   <span>07 APRIL 2021</span>
                 </p>
               </div> */}
-              <h3 className="title">
-                {"Sony announced two new full frame cameras with zero fanfare"}
-              </h3>
+              <h3 className="title">{data?.title}</h3>
             </div>
             {/* END DETAILS */}
             <div className="main_content ">
               <div className="descriptions">
-                <p className="bigger">
+                <PortableText value={data!.body!} components={components} />
+                {/* <p className="bigger">
                   Just because we can&apos;t get out and about like we normally
                   would, doesn’t mean we have to stop taking pictures. There’s
                   still plenty you can do, provided you&apos;re prepared to use
@@ -65,7 +85,7 @@ export default async function Post() {
                     artistic heights.
                   </p>
                 </div>
-                {/* END QUOTEBOX */}
+                
 
                 <p>
                   The trick here is to look slowly, and then look again. Take
@@ -73,7 +93,7 @@ export default async function Post() {
                   different angles, with different light, long lenses and wide
                   lenses. Then move to the left a bit. You may never feel the
                   need to leave the house again.
-                </p>
+                </p> */}
               </div>
               {/* END DESCRIPTION */}
               <div className="news_share">

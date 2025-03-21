@@ -1,29 +1,26 @@
 import Posts from "@/components/Posts";
+import { sanityFetch } from "@/sanity/lib/live";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
 
 export const metadata = {
   title: "Blog || Tokyo - Personal Portfolio React Nextjs Template",
 };
-const index = () => {
+export default async function PostsPage() {
+  const { data } = await sanityFetch({ query: POSTS_QUERY });
   return (
     <>
-      {/* End page title for seo */}
-
-      {/* END LEFT MENU CONTENT */}
-
-      {/* START RIGHT PART CONTENT */}
-
       <div className="container">
         <div className="tokyo_tm_news">
           <div className="tokyo_tm_title">
             <div className="title_flex">
               <div className="left">
-                <span>News</span>
-                <h3>Latest News</h3>
+                <span>Posts</span>
+                <h3>Latest Posts</h3>
               </div>
             </div>
           </div>
           {/* END TITLE */}
-          <Posts />
+          <Posts posts={data!} />
         </div>
       </div>
       {/* End .container */}
@@ -31,6 +28,4 @@ const index = () => {
       {/* END RIGHT PART CONTENT */}
     </>
   );
-};
-
-export default index;
+}

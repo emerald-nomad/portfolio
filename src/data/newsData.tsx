@@ -1,4 +1,4 @@
-const { default: Image } = require("next/image");
+import Image from "next/image";
 
 module.exports = [
   {
