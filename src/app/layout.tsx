@@ -1,5 +1,10 @@
 import { Mulish, Montserrat, Poppins } from "next/font/google";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/scss/style.scss";
+import "aos/dist/aos.css";
+
 const MulishFonts = Mulish({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -32,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${MulishFonts.variable} ${MontserratFonts.variable}  ${PoppinsFonts.variable}  `}
       >
-        {children}
+        <div className="tokyo_tm_all_wrap">{children}</div>
       </body>
     </html>
   );
