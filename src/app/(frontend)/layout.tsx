@@ -16,7 +16,15 @@ export default async function FrontendLayout({ children }: PropsWithChildren) {
       <div className="tokyo_tm_all_wrap">
         <Providers>
           <Sidebar />
-          {children}
+          <div className="rightpart" style={{ minHeight: "100vh" }}>
+            <div className="rightpart_in">
+              <div className="tokyo_tm_section">
+                <div data-aos="fade-right" data-aos-duration="1200">
+                  {children}
+                </div>
+              </div>
+            </div>
+          </div>
         </Providers>
         <SanityLive />
         {(await draftMode()).isEnabled && (
