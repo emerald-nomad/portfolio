@@ -1,6 +1,29 @@
 import Social from "@/components/Social";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PROJECT_QUERY, PROJECTS_SLUGS_QUERY } from "@/sanity/lib/queries";
 
-export default function CaseStudy() {
+export async function generateStaticParams() {
+  const projects = await client.fetch(PROJECTS_SLUGS_QUERY);
+
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
+export default async function CaseStudy({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const { data } = await sanityFetch({
+    query: PROJECT_QUERY,
+    params: { slug },
+  });
+
   return (
     <div className="container">
       <div className="tokyo_tm_modalbox_news portfolio_tm_modalbox">
@@ -14,13 +37,13 @@ export default function CaseStudy() {
               <div
                 className="main"
                 style={{
-                  backgroundImage: "url(/img/portfolio/6.jpg)",
+                  backgroundImage: `url(${urlFor(data!.headerImage!.asset!).url()})`,
                 }}
               ></div>
             </div>
             {/* END IMAGE */}
             <div className="portfolio_main_title">
-              <h3>Selena Gomez</h3>
+              <h3>{data?.title}</h3>
               <span>Details</span>
             </div>
             {/* END portfolio_main_title */}

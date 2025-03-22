@@ -12,3 +12,14 @@ export const POSTS_SLUGS_QUERY =
 export const POST_QUERY = defineQuery(
   `*[_type == "post" && slug.current == $slug][0]`
 );
+
+export const PROJECTS_QUERY = defineQuery(`*[_type == "project"]`);
+
+export const PROJECTS_SLUGS_QUERY =
+  defineQuery(`*[_type == "project" && defined(slug.current)]{ 
+  "slug": slug.current
+}`);
+
+export const PROJECT_QUERY = defineQuery(
+  `*[_type == "project" && slug.current == $slug][0]`
+);

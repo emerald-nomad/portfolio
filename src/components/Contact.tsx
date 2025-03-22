@@ -8,7 +8,8 @@ import Map from "./Map";
 const Contact = () => {
   const form = useRef("");
 
-  const sendEmail = (e: any) => {
+  // @ts-expect-error any
+  const sendEmail = (e) => {
     e.preventDefault();
     emailjs
       .sendForm(
@@ -18,7 +19,7 @@ const Contact = () => {
         "user_vYmDSd9PwIuRXUQEDjYwN"
       )
       .then(
-        (result) => {
+        () => {
           toast.success("Message Sent Successfully!", {
             position: "top-right",
             autoClose: 2000,
@@ -28,11 +29,11 @@ const Contact = () => {
             draggable: true,
             progress: undefined,
           });
-          // @ts-ignore
+          // @ts-expect-error get element
           document.getElementById("myForm")!.reset();
         },
-        (error) => {
-          toast.error("Ops Message Not Sent!", {
+        () => {
+          toast.error("Oops Message Not Sent!", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -66,7 +67,7 @@ const Contact = () => {
             <form
               className="contact_form"
               id="myForm"
-              // @ts-ignore
+              // @ts-expect-error ref
               ref={form}
               onSubmit={sendEmail}
             >

@@ -59,7 +59,7 @@ const Skills = () => {
             {item?.progress?.map((skill) => (
               <div
                 className="progress_inner"
-                data-value={item.skillValue}
+                data-value={skill.skillValue}
                 key={skill.id}
               >
                 <span>
