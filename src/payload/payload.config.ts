@@ -14,7 +14,7 @@ import { BlogContent } from "./blocks/BlogContent";
 import { Code } from "./blocks/Code";
 import { MediaCollection } from "./collections/Media";
 import { MediaBlock } from "./blocks/MediaBlock";
-import { migrations } from "./migrations"
+import { migrations } from "../../migrations"
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -28,7 +28,7 @@ export default buildConfig({
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: vercelPostgresAdapter({
-    migrationDir: path.resolve(dirname, "migrations"),
+    migrationDir: "migrations",
     prodMigrations: migrations
   }),
   // If you want to resize images, crop, set focal point, etc.
