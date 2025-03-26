@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload migrate && next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload generate:types"
+    "typegen": "PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload generate:types",
+    "create:migration": "dotenv -e .env.local -- cross-env PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload migrate:create"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
@@ -30,6 +31,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^8.0.0",
     "esbuild-wasm": "^0.25.1",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",

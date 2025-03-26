@@ -26,7 +26,9 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "",
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
-  db: vercelPostgresAdapter(),
+  db: vercelPostgresAdapter({
+    migrationDir: path.resolve(dirname, "migrations")
+  }),
   // If you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.
   // This is optional - if you don't need to do these things,
@@ -48,7 +50,7 @@ export default buildConfig({
       cacheControlMaxAge: 60 * 60 * 24 * 365, // 1 year
       collections: {
         media: {
-          generateFileURL: ({ filename }: {filename: string}) => `https://l8vv6jxo8e4sjnrh.public.blob.vercel-storage.com/${filename}` //`https://${process.env.BLOB_STORE_ID}/${filename}`,
+          generateFileURL: ({ filename }) => `https://l8vv6jxo8e4sjnrh.public.blob.vercel-storage.com/${filename}`,
         },
       },
       enabled: Boolean(process.env.BLOB_STORAGE_ENABLED) || false,
@@ -58,4 +60,5 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
+  
 });
