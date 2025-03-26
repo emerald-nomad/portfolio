@@ -1,29 +1,22 @@
-// import { getPayload } from "payload"
-// import config from "@/payload/payload.config"
+import { getPayload } from "payload"
+import config from "@/payload/payload.config"
 import { SimpleLayout } from "@/components/SimpleLayout";
 import { Card } from "@/components/Card";
 import { formatDate } from "@/utils/formatDate";
-// import { formatDate } from "@/utils/formatDate";
 
 export default async function ArticlesPages() {
-  // const payload = await getPayload({ config });
+  const payload = await getPayload({ config });
 
-  // const {docs} = await payload.find({
-  //   collection: "articles",
-  //   select: {
-  //     title: true,
-  //     description: true,
-  //     slug: true,
-  //     publishedAt: true
-  //   }
-  // });
-  const docs: {
-    id: number;
-    title: string;
-    slug?: string | null | undefined;
-    description: string;
-    publishedAt: string;
-}[] = []
+  const {docs} = await payload.find({
+    collection: "articles",
+    select: {
+      title: true,
+      description: true,
+      slug: true,
+      publishedAt: true
+    }
+  });
+  
 
   return (
      <SimpleLayout
