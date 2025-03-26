@@ -1,6 +1,5 @@
 import type {
   DOMExportOutput,
-  EditorConfig,
   LexicalEditor,
   LexicalNode,
   NodeKey,
@@ -68,7 +67,7 @@ export class LabelNode extends ElementNode {
     return true
   }
 
-  createDOM(config: EditorConfig): HTMLElement {
+  createDOM(): HTMLElement {
     const element = document.createElement('span')
     addClassNamesToElement(element, 'rich-text-label-node')
     return element
@@ -117,7 +116,7 @@ export class LabelNode extends ElementNode {
     return false
   }
 
-  updateDOM(prevNode: LabelNode, dom: HTMLElement): boolean {
+  updateDOM(): boolean {
     return false
   }
 }

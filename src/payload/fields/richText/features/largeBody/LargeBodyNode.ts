@@ -1,6 +1,5 @@
 import type {
   DOMExportOutput,
-  EditorConfig,
   LexicalEditor,
   LexicalNode,
   NodeKey,
@@ -68,7 +67,7 @@ export class LargeBodyNode extends ElementNode {
     return true
   }
 
-  createDOM(config: EditorConfig): HTMLElement {
+  createDOM(): HTMLElement {
     const element = document.createElement('span')
     addClassNamesToElement(element, 'rich-text-large-body')
     return element
@@ -117,7 +116,7 @@ export class LargeBodyNode extends ElementNode {
     return false
   }
 
-  updateDOM(prevNode: LargeBodyNode, dom: HTMLElement): boolean {
+  updateDOM(): boolean {
     return false
   }
 }
