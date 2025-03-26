@@ -5,6 +5,11 @@ export const ArticlesCollection: CollectionConfig = {
   slug: "articles",
   fields: [
     {
+      name: "publishedAt",
+      type: "date",
+      required: true
+    },
+    {
       name: "title",
       type: "text",
       required: true,
@@ -18,7 +23,7 @@ export const ArticlesCollection: CollectionConfig = {
     {
       name: "content",
       type: "blocks",
-      blockReferences: ["blogContent", "code"],
+      blockReferences: ["blogContent", "code", "mediaBlock"],
       blocks: [],
       required: true,
     },
