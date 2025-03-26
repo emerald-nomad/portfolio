@@ -1,22 +1,26 @@
-import sharp from 'sharp'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
-import { buildConfig } from 'payload'
-import { PostsCollection } from './collections/Posts'
-import { BlogContent } from './blocks/BlogContent'
-import { Code } from './blocks/Code'
+import sharp from "sharp";
+import path from "path";
+import { fileURLToPath } from "url";
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
+import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
+import { buildConfig } from "payload";
+import { ArticlesCollection } from "./collections/Articles";
+import { BlogContent } from "./blocks/BlogContent";
+import { Code } from "./blocks/Code";
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   // Define and configure your collections in this array
-  collections: [PostsCollection],
+  collections: [ArticlesCollection],
 
   // Your Payload secret - should be a complex and secure string, unguessable
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || "",
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: vercelPostgresAdapter(),
@@ -25,18 +29,18 @@ export default buildConfig({
   // This is optional - if you don't need to do these things,
   // you don't need it!
   sharp,
-   // If you'd like to use Rich Text, pass your editor here
+  // If you'd like to use Rich Text, pass your editor here
   blocks: [Code, BlogContent],
   editor: lexicalEditor({
-    features: ({defaultFeatures}) => ([
-      ...defaultFeatures, 
-      FixedToolbarFeature(), 
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
       BlocksFeature({
-        blocks: []
-      })
-    ])
+        blocks: [],
+      }),
+    ],
   }),
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-})
+});

@@ -10,11 +10,14 @@
     "typegen": "PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload generate:types"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@payloadcms/db-vercel-postgres": "^3.31.0",
     "@payloadcms/next": "^3.31.0",
     "@payloadcms/richtext-lexical": "^3.31.0",
+    "@tailwindcss/typography": "^0.5.16",
     "graphql": "^16.10.0",
     "next": "15.2.4",
+    "next-themes": "^0.4.6",
     "payload": "^3.31.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
