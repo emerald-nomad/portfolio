@@ -5,6 +5,8 @@ import { formatDate } from "@/utils/formatDate";
 import clsx from 'clsx'
 import { ArticleBackButton } from "@/components/ArticleBackButton";
 
+export const dynamicParams = true
+
 export async function generateStaticParams() {
   const payload = await getPayload({ config });
 
