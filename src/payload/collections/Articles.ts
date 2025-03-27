@@ -47,7 +47,7 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
   },
   versions: {
     drafts: {
-      autosave: true,
+      autosave: false,
       schedulePublish: true
     },
   },
