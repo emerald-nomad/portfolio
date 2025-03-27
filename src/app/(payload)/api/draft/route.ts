@@ -1,7 +1,7 @@
 import { draftMode } from "next/headers"
 import { redirect } from "next/navigation"
 
-const previewSecret = process.env.PREVIEW_SECRET;
+const previewSecret = process.env.NEXT_PUBLIC_PREVIEW_SECRET;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
