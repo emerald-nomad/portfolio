@@ -14,7 +14,10 @@ export default async function ArticlesPages() {
       description: true,
       slug: true,
       publishedAt: true
-    }
+    },
+    sort: ["-publishedAt"],
+    pagination: true,
+    limit: 10,
   });
   
 
