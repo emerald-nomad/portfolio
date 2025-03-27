@@ -51,12 +51,25 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
   },
   access: {
     read({req}) {
-      if (req.user) return true;
+      console.log("Read access")
+      console.log(req.user)
+      if (req.user) {
+        return true;
+      } 
 
       return {
-        _status: {
-          equals: 'published',
-        },
+        or: [
+          {
+            _status: {
+              equals: 'published',
+            },
+          },
+          {
+            _status: {
+              exists: false,
+            },
+          },
+        ],
       }
     }
   },
