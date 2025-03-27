@@ -41,6 +41,7 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
   admin: {
     livePreview: {
       url: ({ data }) => {
+        console.log({data})
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
       }
     }
