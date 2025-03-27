@@ -42,7 +42,7 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
     livePreview: {
       url: ({ data }) => {
         console.log({data, secret: process.env.NEXT_PUBLIC_PREVIEW_SECRET})
-        return `/api/draft?secret=${process.env.NEXT_PUBLIC_PREVIEW_SECRET}&slug=/articles/${data.slug}`
+        return `/api/draft?secret="${process.env.NEXT_PUBLIC_PREVIEW_SECRET}"&slug="/articles/${data.slug}"`
       }
     }
   },
