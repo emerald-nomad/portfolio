@@ -1,13 +1,15 @@
-import type {  CollectionConfig } from "payload";
+import type { CollectionAfterChangeHook, CollectionConfig } from "payload";
 import { slugField } from "../fields/slug";
-// import { Article } from "../payload-types";
-// import { revalidateArticle } from "@/actions/revalidateArticle";
+import { Article } from "../payload-types";
+import { revalidateArticle } from "@/actions/revalidateArticle";
 
-// const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
-//   await revalidateArticle(doc.slug!);
-
-//   return doc;
-// }
+const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
+  if (doc._status == "published") {
+    await revalidateArticle(doc.slug!);
+  }
+ 
+  return doc;
+}
 
 export const ArticlesCollection: CollectionConfig<"articles"> = {
   slug: "articles",
@@ -39,7 +41,7 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
   admin: {
     livePreview: {
       url: ({ data }) => {
-        return `/articles/${data.slug}`
+        return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
       }
     }
   },
@@ -50,9 +52,7 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
     },
   },
   access: {
-    read({req}) {
-      console.log("Read access")
-      console.log(req.user)
+    read({req, }) {
       if (req.user) {
         return true;
       } 
@@ -74,9 +74,9 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
     }
   },
   hooks: {
-    // afterChange: [
-    //   afterChangeHook
-    // ]
+    afterChange: [
+      afterChangeHook
+    ]
   }
 };
 

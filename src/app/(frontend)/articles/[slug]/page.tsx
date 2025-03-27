@@ -9,15 +9,17 @@ import { CodeBlock } from "@/components/CodeBlock";
 import { Media } from "@/payload/payload-types";
 import Image from "next/image";
 import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
+import { draftMode } from "next/headers";
 
 export const dynamicParams = true
 
 export async function generateStaticParams() {
+  const { isEnabled } = await draftMode()
   const payload = await getPayload({ config });
 
   const {docs} = await payload.find({
     collection: "articles",
-    draft: true,
+    draft: isEnabled,
     select: {
       slug: true
     }
@@ -27,14 +29,15 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({params}: {params: Promise<{slug: string; id: string;}>}) {
+  const { isEnabled } = await draftMode()
   const payload = await getPayload({ config });
   const {slug} = await params;
 
   const {docs} = await payload.find({
     collection: "articles", 
-    draft: true,
+    draft: isEnabled,
     limit: 1,
-    where: { slug: { equals: slug } }
+    where: { slug: { equals: slug } },
   })
   const article = docs[0];
 
