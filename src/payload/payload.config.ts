@@ -15,14 +15,19 @@ import { Code } from "./blocks/Code";
 import { MediaCollection } from "./collections/Media";
 import { MediaBlock } from "./blocks/MediaBlock";
 import { migrations } from "../../migrations"
+import { PagesCollection } from "./collections/Pages";
+import { SimpleLayout } from "./blocks/SimpleLayout";
+import { GalleryLayout } from "./blocks/GalleryLayout";
+import { SocialLinksCollection } from "./collections/SocialLinks";
+import { ArticleListWide } from "./blocks/ArticleListWide";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
   // Define and configure your collections in this array
-  collections: [ArticlesCollection, MediaCollection],
-
+  collections: [ArticlesCollection, MediaCollection, PagesCollection, SocialLinksCollection],
+  globals: [],
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || "",
   // Whichever Database Adapter you're using should go here
@@ -37,7 +42,7 @@ export default buildConfig({
   // you don't need it!
   sharp,
   // If you'd like to use Rich Text, pass your editor here
-  blocks: [BlogContent, Code, MediaBlock],
+  blocks: [ArticleListWide, BlogContent, Code, GalleryLayout, MediaBlock, SimpleLayout],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,

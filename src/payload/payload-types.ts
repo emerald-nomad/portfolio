@@ -66,13 +66,18 @@ export interface Config {
     users: UserAuthOperations;
   };
   blocks: {
+    articleListWide: ArticleListWide;
     blogContent: BlogContent;
     code: Code;
+    galleryLayout: GalleryLayout;
     mediaBlock: MediaBlock;
+    simpleLayout: SimpleLayout;
   };
   collections: {
     articles: Article;
     media: Media;
+    pages: Page;
+    socialLinks: SocialLink;
     users: User;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -83,6 +88,8 @@ export interface Config {
   collectionsSelect: {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    socialLinks: SocialLinksSelect<false> | SocialLinksSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -129,6 +136,17 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articleListWide".
+ */
+export interface ArticleListWide {
+  limit: number;
+  sort: 'publishedAt' | '-publishedAt';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'articleListWide';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogContent".
  */
 export interface BlogContent {
@@ -161,6 +179,17 @@ export interface Code {
   id?: string | null;
   blockName?: string | null;
   blockType: 'code';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleryLayout".
+ */
+export interface GalleryLayout {
+  title: string;
+  intro: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleryLayout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -208,6 +237,18 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "simpleLayout".
+ */
+export interface SimpleLayout {
+  title: string;
+  intro: string;
+  content?: ArticleListWide[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'simpleLayout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles".
  */
 export interface Article {
@@ -221,6 +262,29 @@ export interface Article {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  name: string;
+  slug: string;
+  content: (SimpleLayout | GalleryLayout)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socialLinks".
+ */
+export interface SocialLink {
+  id: number;
+  text: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -347,6 +411,14 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'socialLinks';
+        value: number | SocialLink;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -428,6 +500,27 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  content?: T | {};
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socialLinks_select".
+ */
+export interface SocialLinksSelect<T extends boolean = true> {
+  text?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

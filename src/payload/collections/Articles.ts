@@ -43,7 +43,8 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
       url: ({ data }) => {
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
       }
-    }
+    },
+    
   },
   versions: {
     drafts: {
