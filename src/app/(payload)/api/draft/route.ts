@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const secret = searchParams.get('secret')
   const slug = searchParams.get('slug')
 
-  console.log({secret, slug})
+  console.log({secret, slug, searchParams})
 
   if (secret !== previewSecret || !slug) {
     return new Response('Invalid token', { status: 401 })
