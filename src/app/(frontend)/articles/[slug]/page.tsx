@@ -8,6 +8,7 @@ import { ArticleBackButton } from "@/components/ArticleBackButton";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Media } from "@/payload/payload-types";
 import Image from "next/image";
+import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
 
 export const dynamicParams = true
 
@@ -28,10 +29,17 @@ export default async function ArticlePage({params}: {params: Promise<{slug: stri
   const payload = await getPayload({ config });
   const {slug} = await params;
 
-  const {docs} = await payload.find({collection: "articles", where: {slug: {equals: slug}}})
+  const {docs} = await payload.find({
+    collection: "articles", 
+    draft: true,
+    limit: 1,
+    where: { slug: { equals: slug } }
+  })
   const article = docs[0];
 
   return (
+    <>
+     <RefreshRouteOnSave />
       <Container className="mt-16 lg:mt-32">
       <div className="xl:relative">
          <div className="mx-auto max-w-2xl">
@@ -67,5 +75,6 @@ export default async function ArticlePage({params}: {params: Promise<{slug: stri
          </div>
       </div>
     </Container>
+    </>
   );
 }

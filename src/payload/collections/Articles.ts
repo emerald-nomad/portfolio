@@ -36,6 +36,30 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
       required: true,
     },
   ],
+  admin: {
+    livePreview: {
+      url: ({ data }) => {
+        return `/articles/${data.slug}`
+      }
+    }
+  },
+  versions: {
+    drafts: {
+      autosave: true,
+      schedulePublish: true
+    },
+  },
+  access: {
+    read({req}) {
+      if (req.user) return true;
+
+      return {
+        _status: {
+          equals: 'published',
+        },
+      }
+    }
+  },
   hooks: {
     afterChange: [
       afterChangeHook
