@@ -31,7 +31,7 @@ export default async function ArticlePage({params}: {params: Promise<{slug: stri
 
   const {docs} = await payload.find({
     collection: "articles", 
-    draft: true,
+    // draft: true,
     limit: 1,
     where: { slug: { equals: slug } }
   })
