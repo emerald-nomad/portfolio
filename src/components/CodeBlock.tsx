@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Prism from "prismjs";
-import loadLanguages from 'prismjs/components/index.js';
+import loadLanguages from 'prismjs/components/';
 
 export function CodeBlock({ code, language }: {code: string; language: string}) {
   useEffect(() => {
