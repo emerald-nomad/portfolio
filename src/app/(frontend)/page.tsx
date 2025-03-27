@@ -1,6 +1,29 @@
+import { getPayload } from "payload"
+import config from "@/payload/payload.config"
 import { Container } from "@/components/Container";
+import { Newsletter } from "@/components/NewLetter";
+import { Photos } from "@/components/Photos";
+import { Resume } from "@/components/Resume";
+import { XIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from "@/components/SocialIcons";
+import { SocialLink } from "@/components/SocialLink";
+import { Card } from "@/components/Card";
+import { formatDate } from "@/utils/formatDate";
 
-export default function Home() {
+export default async function Home() {
+  const payload = await getPayload({ config });
+  
+    const {docs: articles} = await payload.find({
+      collection: "articles",
+      select: {
+        title: true,
+        description: true,
+        slug: true,
+        publishedAt: true
+      },
+      sort: ["-publishedAt"],
+      pagination: true,
+      limit: 10,
+    });
   return (
     <>
       <Container className="mt-9">
@@ -15,7 +38,7 @@ export default function Home() {
             own terms.
           </p>
           <div className="mt-6 flex gap-6">
-            {/* <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
+            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
             <SocialLink
               href="#"
               aria-label="Follow on Instagram"
@@ -30,10 +53,45 @@ export default function Home() {
               href="#"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
-            /> */}
+            />
+          </div>
+        </div>
+      </Container>
+      <Photos />
+      <Container className="mt-24 md:mt-28">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-16">
+            {articles.map((article) => (
+              <Article key={article.slug} article={article} />
+            ))}
+          </div>
+          <div className="space-y-10 lg:pl-16 xl:pl-24">
+            <Newsletter />
+            <Resume />
           </div>
         </div>
       </Container>
     </>
   );
+}
+
+function Article({ article }: { article: {
+    id: number;
+    publishedAt: string;
+    title: string;
+    slug?: string | null | undefined;
+    description: string;
+} }) {
+  return (
+    <Card as="article">
+      <Card.Title href={`/articles/${article.slug}`}>
+        {article.title}
+      </Card.Title>
+      <Card.Eyebrow as="time" dateTime={article.publishedAt} decorate>
+        {formatDate(article.publishedAt)}
+      </Card.Eyebrow>
+      <Card.Description>{article.description}</Card.Description>
+      <Card.Cta>Read article</Card.Cta>
+    </Card>
+  )
 }
