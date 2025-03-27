@@ -1,13 +1,13 @@
-import type { CollectionAfterChangeHook, CollectionConfig } from "payload";
+import type {  CollectionConfig } from "payload";
 import { slugField } from "../fields/slug";
-import { Article } from "../payload-types";
-import { revalidateArticle } from "@/actions/revalidateArticle";
+// import { Article } from "../payload-types";
+// import { revalidateArticle } from "@/actions/revalidateArticle";
 
-const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
-  await revalidateArticle(doc.slug!);
+// const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
+//   await revalidateArticle(doc.slug!);
 
-  return doc;
-}
+//   return doc;
+// }
 
 export const ArticlesCollection: CollectionConfig<"articles"> = {
   slug: "articles",
@@ -74,9 +74,9 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
     }
   },
   hooks: {
-    afterChange: [
-      afterChangeHook
-    ]
+    // afterChange: [
+    //   afterChangeHook
+    // ]
   }
 };
 

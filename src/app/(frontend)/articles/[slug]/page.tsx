@@ -17,6 +17,7 @@ export async function generateStaticParams() {
 
   const {docs} = await payload.find({
     collection: "articles",
+    draft: true,
     select: {
       slug: true
     }
