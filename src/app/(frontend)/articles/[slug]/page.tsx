@@ -14,12 +14,10 @@ import { draftMode } from "next/headers";
 export const dynamicParams = true
 
 export async function generateStaticParams() {
-  const { isEnabled } = await draftMode()
   const payload = await getPayload({ config });
 
   const {docs} = await payload.find({
     collection: "articles",
-    draft: isEnabled,
     select: {
       slug: true
     }
