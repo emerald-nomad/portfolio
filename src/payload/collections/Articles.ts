@@ -13,6 +13,15 @@ const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
 
 export const ArticlesCollection: CollectionConfig<'articles'> = {
   slug: 'articles',
+  admin: {
+    useAsTitle: "title",
+    defaultColumns: ["title", "slug", "description"],
+    livePreview: {
+      url: ({ data }) => {
+        return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
+      },
+    },
+  },
   fields: [
     {
       name: 'publishedAt',
@@ -33,17 +42,9 @@ export const ArticlesCollection: CollectionConfig<'articles'> = {
     {
       name: 'content',
       type: 'richText',
-     
       required: true,
     },
   ],
-  admin: {
-    livePreview: {
-      url: ({ data }) => {
-        return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
-      },
-    },
-  },
   versions: {
     drafts: {
       autosave: false,

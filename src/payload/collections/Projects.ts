@@ -5,6 +5,7 @@ export const ProjectsCollection: CollectionConfig = {
   slug: "projects",
   admin: {
     useAsTitle: "name",
+    defaultColumns: ["name", "slug", "description"],
   },
   fields: [
     {

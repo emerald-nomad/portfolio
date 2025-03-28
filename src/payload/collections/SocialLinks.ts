@@ -3,7 +3,8 @@ import { CollectionConfig } from 'payload'
 export const SocialLinksCollection: CollectionConfig = {
   slug: 'socialLinks',
   admin: {
-    useAsTitle: "text"
+    useAsTitle: "text",
+    defaultColumns: ["text", "slug", "icon"],
   },
   fields: [
     {
