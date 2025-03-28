@@ -1,4 +1,5 @@
 export const languages = {
+  rust: "Rust",
   c: "C",
   ts: 'TypeScript',
   plaintext: 'Plain Text',
