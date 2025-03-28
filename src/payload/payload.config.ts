@@ -10,10 +10,8 @@ import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import { ArticlesCollection } from './collections/Articles'
-import { BlogContent } from './blocks/BlogContent'
 import { Code } from './blocks/Code'
 import { MediaCollection } from './collections/Media'
-import { MediaBlock } from './blocks/MediaBlock'
 import { migrations } from '../../migrations'
 import { PagesCollection } from './collections/Pages'
 import { SimpleLayout } from './blocks/SimpleLayout'
@@ -56,10 +54,8 @@ export default buildConfig({
   blocks: [
     ArticleListThin,
     ArticleListWide,
-    BlogContent,
     Code,
     GalleryLayout,
-    MediaBlock,
     NewsLetter,
     ProjectList,
     SimpleLayout,

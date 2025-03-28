@@ -68,10 +68,8 @@ export interface Config {
   blocks: {
     articleListThin: ArticleListThin;
     articleListWide: ArticleListWide;
-    blogContent: BlogContent;
     Code: Code;
     galleryLayout: GalleryLayout;
-    mediaBlock: MediaBlock;
     newsLetter: NewsLetter;
     projectList: ProjectList;
     simpleLayout: SimpleLayout;
@@ -164,34 +162,10 @@ export interface ArticleListWide {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogContent".
- */
-export interface BlogContent {
-  richText: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'blogContent';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Code".
  */
 export interface Code {
-  language?: ('c' | 'ts' | 'plaintext' | 'tsx' | 'js' | 'jsx') | null;
+  language?: ('rust' | 'c' | 'ts' | 'plaintext' | 'tsx' | 'js' | 'jsx') | null;
   code?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -285,31 +259,6 @@ export interface Resume {
   id?: string | null;
   blockName?: string | null;
   blockType: 'resume';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "mediaBlock".
- */
-export interface MediaBlock {
-  media: number | Media;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
