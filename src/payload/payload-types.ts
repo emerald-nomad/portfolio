@@ -274,6 +274,7 @@ export interface Page {
   content: (SimpleLayout | GalleryLayout)[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -511,6 +512,7 @@ export interface PagesSelect<T extends boolean = true> {
   content?: T | {};
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -608,10 +610,15 @@ export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'articles';
-      value: number | Article;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'articles';
+          value: number | Article;
+        } | null)
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null);
     global?: string | null;
     user?: (number | null) | User;
   };
