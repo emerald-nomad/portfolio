@@ -70,7 +70,7 @@ export default buildConfig({
       ...defaultFeatures,
       FixedToolbarFeature(),
       BlocksFeature({
-        blocks: [],
+        blocks: [Code],
       }),
     ],
   }),

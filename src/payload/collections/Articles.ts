@@ -32,9 +32,8 @@ export const ArticlesCollection: CollectionConfig<'articles'> = {
     },
     {
       name: 'content',
-      type: 'blocks',
-      blockReferences: ['blogContent', 'code', 'mediaBlock'],
-      blocks: [],
+      type: 'richText',
+     
       required: true,
     },
   ],

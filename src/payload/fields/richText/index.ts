@@ -1,4 +1,5 @@
-import type { FeatureProviderServer } from '@payloadcms/richtext-lexical'
+import { languages } from '@/utils/languages'
+import { BlocksFeature, lexicalEditor, type FeatureProviderServer } from '@payloadcms/richtext-lexical'
 import type { RichTextField } from 'payload'
 
 type RichText = (
@@ -13,6 +14,39 @@ const richText: RichText = (overrides = {}): RichTextField => {
     name: 'richText',
     type: 'richText',
     required: true,
+    editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      BlocksFeature({
+        blocks: [
+          {
+            slug: 'Code',
+            fields: [
+              {
+                type: 'select',
+                name: 'language',
+                options: Object.entries(languages).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                })),
+                defaultValue: 'ts',
+              },
+              {
+                admin: {
+                  components: {
+                    Field: '@/payload/fields/richText/Code#Code',
+                  },
+                },
+                name: 'code',
+                type: 'code',
+              },
+            ],
+          }
+        ],
+        inlineBlocks: [],
+      }),
+    ],
+  }),
     ...overridesToMerge,
   }
 }

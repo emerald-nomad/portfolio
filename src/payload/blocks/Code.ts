@@ -1,75 +1,29 @@
+import { languages } from '@/utils/languages'
 import type { Block } from 'payload'
 
 // import { blockFields } from '@/payload/fields/blockFields'
 // import codeBlips from '@/payload/fields/codeBlips'
 
-export const Code: Block = {
-  slug: 'code',
-  // fields: [
-  //   blockFields({
-  //     name: 'codeFields',
-  //     fields: [
-  //       {
-  //         name: 'language',
-  //         type: 'select',
-  //         defaultValue: 'none',
-  //         options: [
-  //           {
-  //             label: 'None',
-  //             value: 'none',
-  //           },
-  //           {
-  //             label: 'JavaScript',
-  //             value: 'js',
-  //           },
-  //           {
-  //             label: 'TypeScript',
-  //             value: 'ts',
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         name: 'code',
-  //         type: 'code',
-  //         required: true,
-  //       },
-  //       codeBlips,
-  //     ],
-  //   }),
-  // ],
-  fields: [
-    {
-      name: 'language',
-      type: 'select',
-      defaultValue: 'none',
-      options: [
-        {
-          label: 'None',
-          value: 'none',
-        },
-        {
-          label: 'C',
-          value: 'c',
-        },
-        {
-          label: 'JavaScript',
-          value: 'js',
-        },
-        {
-          label: 'TypeScript',
-          value: 'ts',
-        },
-        {
-          label: 'Rust',
-          value: 'rust',
-        },
-      ],
-    },
-    {
-      name: 'code',
-      type: 'code',
-      required: true,
-    },
-    // codeBlips,
-  ],
-}
+export const Code: Block =   {
+            slug: 'Code',
+            fields: [
+              {
+                type: 'select',
+                name: 'language',
+                options: Object.entries(languages).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                })),
+                defaultValue: 'ts',
+              },
+              {
+                admin: {
+                  components: {
+                    Field: '@/payload/components/Code#Code',
+                  },
+                },
+                name: 'code',
+                type: 'code',
+              },
+            ],
+          }

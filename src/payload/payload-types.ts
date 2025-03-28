@@ -69,7 +69,7 @@ export interface Config {
     articleListThin: ArticleListThin;
     articleListWide: ArticleListWide;
     blogContent: BlogContent;
-    code: Code;
+    Code: Code;
     galleryLayout: GalleryLayout;
     mediaBlock: MediaBlock;
     newsLetter: NewsLetter;
@@ -188,14 +188,14 @@ export interface BlogContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "code".
+ * via the `definition` "Code".
  */
 export interface Code {
-  language?: ('none' | 'c' | 'js' | 'ts' | 'rust') | null;
-  code: string;
+  language?: ('c' | 'ts' | 'plaintext' | 'tsx' | 'js' | 'jsx') | null;
+  code?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'code';
+  blockType: 'Code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -360,7 +360,21 @@ export interface Article {
   slug?: string | null;
   slugLock?: boolean | null;
   description: string;
-  content: (BlogContent | Code | MediaBlock)[];
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -574,7 +588,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   description?: T;
-  content?: T | {};
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

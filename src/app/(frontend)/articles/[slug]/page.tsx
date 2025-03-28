@@ -1,15 +1,13 @@
 import { getPayload } from 'payload'
-import { RichText } from '@payloadcms/richtext-lexical/react'
+// import { RichText } from '@payloadcms/richtext-lexical/react'
 import config from '@/payload/payload.config'
 import { Container } from '@/components/Container'
 import { formatDate } from '@/utils/formatDate'
 import clsx from 'clsx'
 import { ArticleBackButton } from '@/components/ArticleBackButton'
-import { CodeBlock } from '@/components/CodeBlock'
-import { Media } from '@/payload/payload-types'
-import Image from 'next/image'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { draftMode } from 'next/headers'
+import { RichText } from '@/components/RichText'
 
 export const dynamicParams = true
 
@@ -69,32 +67,7 @@ export default async function ArticlePage({
                 className={clsx('mt-8', 'prose dark:prose-invert')}
                 data-mdx-content
               >
-                {article.content.map((c) => {
-                  switch (c.blockType) {
-                    case 'blogContent':
-                      return <RichText key={c.id} data={c.richText} />
-                    case 'code':
-                      return (
-                        <CodeBlock
-                          key={c.id}
-                          code={c.code}
-                          language={c.language!}
-                        />
-                      )
-
-                    case 'mediaBlock':
-                      const media = c.media as Media
-                      return (
-                        <Image
-                          key={c.id}
-                          width={media.width!}
-                          height={media.height!}
-                          src={media.url!}
-                          alt={media.alt}
-                        />
-                      )
-                  }
-                })}
+                <RichText data={article.content} />
               </div>
             </article>
           </div>
