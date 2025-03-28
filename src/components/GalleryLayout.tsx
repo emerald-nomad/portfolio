@@ -1,6 +1,7 @@
 import { GalleryLayout as IGalleryLayout } from '@/payload/payload-types'
 import { Container } from './Container'
 import { ArticleListThin } from './ArticleListThin'
+import { Photos } from './Photos'
 
 interface GalleryLayoutProps {
   content: IGalleryLayout
@@ -48,7 +49,7 @@ export function GalleryLayout({ content }: GalleryLayoutProps) {
           </div>
         </div>
       </Container>
-      {/* <Photos /> */}
+      <Photos photos={content.photos} />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">{renderLeftSide()}</div>

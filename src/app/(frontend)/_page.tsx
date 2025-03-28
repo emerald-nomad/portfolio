@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
 import { Container } from '@/components/Container'
 import { Newsletter } from '@/components/NewLetter'
-import { Photos } from '@/components/Photos'
+// import { Photos } from '@/components/Photos'
 import { Resume } from '@/components/Resume'
 import {
   XIcon,
@@ -62,7 +62,7 @@ export default async function Home() {
           </div>
         </div>
       </Container>
-      <Photos />
+      {/* <Photos /> */}
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
