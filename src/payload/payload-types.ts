@@ -73,6 +73,7 @@ export interface Config {
     galleryLayout: GalleryLayout;
     mediaBlock: MediaBlock;
     newsLetter: NewsLetter;
+    projectList: ProjectList;
     simpleLayout: SimpleLayout;
     resume: Resume;
   };
@@ -80,6 +81,7 @@ export interface Config {
     articles: Article;
     media: Media;
     pages: Page;
+    projects: Project;
     socialLinks: SocialLink;
     users: User;
     'payload-jobs': PayloadJob;
@@ -92,6 +94,7 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     socialLinks: SocialLinksSelect<false> | SocialLinksSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -310,12 +313,38 @@ export interface MediaBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projectList".
+ */
+export interface ProjectList {
+  projects: {
+    project: number | Project;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'projectList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  name: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "simpleLayout".
  */
 export interface SimpleLayout {
   title: string;
   intro: string;
-  content?: ArticleListWide[] | null;
+  content?: (ArticleListWide | ProjectList)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'simpleLayout';
@@ -478,6 +507,10 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
         relationTo: 'socialLinks';
         value: number | SocialLink;
       } | null)
@@ -575,6 +608,18 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  slugLock?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -23,6 +23,8 @@ import { ArticleListWide } from './blocks/ArticleListWide'
 import { ArticleListThin } from './blocks/ArticleListThin'
 import { NewsLetter } from './blocks/NewsLetter'
 import { Resume } from './blocks/Resume'
+import { ProjectsCollection } from './collections/Projects'
+import { ProjectList } from './blocks/ProjectList'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,6 +35,7 @@ export default buildConfig({
     ArticlesCollection,
     MediaCollection,
     PagesCollection,
+    ProjectsCollection,
     SocialLinksCollection,
   ],
   globals: [],
@@ -58,6 +61,7 @@ export default buildConfig({
     GalleryLayout,
     MediaBlock,
     NewsLetter,
+    ProjectList,
     SimpleLayout,
     Resume
   ],
