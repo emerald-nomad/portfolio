@@ -1,8 +1,5 @@
+import {Resume as IResume, Media} from "@/payload/payload-types"
 import Image, { ImageProps } from 'next/image'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
 import { ArrowDownIcon, BriefcaseIcon } from './SocialIcons'
 import { Button } from './Button'
 
@@ -14,28 +11,35 @@ interface Role {
   end: string | { label: string; dateTime: string }
 }
 
-function Role({ role }: { role: Role }) {
-  const startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
-  const startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
+interface RoleProps {
+  content: IResume['roles'][0]
+}
 
-  const endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  const endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
+function Role({ content }: RoleProps) {
+  const startYear = new Date(content.start).getFullYear().toString()
+  
+  const startLabel = startYear;
+  const startDate = startYear
+
+  const endYear = (content.end ? new Date(content.end) : new Date()).getFullYear().toString()
+  const endLabel = content.end ? endYear : "Present";
+  const endDate = endYear;
+
+  const icon = (content.icon) as Media;
 
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+        <Image src={icon.url!} alt={icon.alt} className="h-7 w-7" width={icon.width!} height={icon.height!} />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
         <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-          {role.company}
+          {content.company}
         </dd>
         <dt className="sr-only">Role</dt>
         <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
+          {content.title}
         </dd>
         <dt className="sr-only">Date</dt>
         <dd
@@ -51,50 +55,20 @@ function Role({ role }: { role: Role }) {
   )
 }
 
-export function Resume() {
-  const resume: Array<Role> = [
-    {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
-      start: '2019',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
-    },
-    {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
-    },
-    {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
-    },
-  ]
+interface ResumeProps {
+  content: IResume
+}
 
+export function Resume({content}: ResumeProps) {
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">{content.title}</span>
       </h2>
       <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
+        {content.roles.map((role) => (
+          <Role key={role.id} content={role}/>
         ))}
       </ol>
       <Button href="#" variant="secondary" className="group mt-6 w-full">

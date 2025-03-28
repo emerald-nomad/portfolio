@@ -25,6 +25,18 @@ export const GalleryLayout: Block = {
         },
       ],
     },
+     {
+      name: 'socialLinks',
+      type: 'array',
+      maxRows: 5,
+      fields: [
+        {
+          name: 'link',
+          type: 'relationship',
+          relationTo: 'socialLinks',
+        },
+      ],
+    },
     {
       type: 'tabs',
       tabs: [
@@ -41,7 +53,14 @@ export const GalleryLayout: Block = {
         },
         {
           name: 'rightSide',
-          fields: [],
+          fields: [
+            {
+              name: 'content',
+              type: 'blocks',
+              blocks: [],
+              blockReferences: ['newsLetter', 'resume'],
+            },
+          ],
         },
       ],
     },

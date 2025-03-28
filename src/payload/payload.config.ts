@@ -21,6 +21,8 @@ import { GalleryLayout } from './blocks/GalleryLayout'
 import { SocialLinksCollection } from './collections/SocialLinks'
 import { ArticleListWide } from './blocks/ArticleListWide'
 import { ArticleListThin } from './blocks/ArticleListThin'
+import { NewsLetter } from './blocks/NewsLetter'
+import { Resume } from './blocks/Resume'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,7 +57,9 @@ export default buildConfig({
     Code,
     GalleryLayout,
     MediaBlock,
+    NewsLetter,
     SimpleLayout,
+    Resume
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

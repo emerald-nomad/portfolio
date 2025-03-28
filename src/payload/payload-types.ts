@@ -72,7 +72,9 @@ export interface Config {
     code: Code;
     galleryLayout: GalleryLayout;
     mediaBlock: MediaBlock;
+    newsLetter: NewsLetter;
     simpleLayout: SimpleLayout;
+    resume: Resume;
   };
   collections: {
     articles: Article;
@@ -205,10 +207,18 @@ export interface GalleryLayout {
         id?: string | null;
       }[]
     | null;
+  socialLinks?:
+    | {
+        link?: (number | null) | SocialLink;
+        id?: string | null;
+      }[]
+    | null;
   leftSide?: {
     content?: ArticleListThin[] | null;
   };
-  rightSide?: {};
+  rightSide?: {
+    content?: (NewsLetter | Resume)[] | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'galleryLayout';
@@ -231,6 +241,47 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socialLinks".
+ */
+export interface SocialLink {
+  id: number;
+  text: string;
+  slug: string;
+  icon: 'arrowDown' | 'briefcase' | 'github' | 'instagram' | 'linkedIn' | 'mail' | 'x';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsLetter".
+ */
+export interface NewsLetter {
+  title: string;
+  subTitle: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsLetter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resume".
+ */
+export interface Resume {
+  title: string;
+  roles: {
+    company: string;
+    title: string;
+    icon: number | Media;
+    start: string;
+    end?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'resume';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -297,17 +348,6 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "socialLinks".
- */
-export interface SocialLink {
-  id: number;
-  text: string;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -543,6 +583,7 @@ export interface PagesSelect<T extends boolean = true> {
 export interface SocialLinksSelect<T extends boolean = true> {
   text?: T;
   slug?: T;
+  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }
