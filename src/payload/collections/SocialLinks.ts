@@ -1,17 +1,17 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig } from 'payload'
 
 export const SocialLinksCollection: CollectionConfig = {
-  slug: "socialLinks",
+  slug: 'socialLinks',
   fields: [
     {
-      name: "text",
-      type: "text",
-      required: true
+      name: 'text',
+      type: 'text',
+      required: true,
     },
     {
-      name: "slug",
-      type: "text",
-      required: true
-    }
-  ]
+      name: 'slug',
+      type: 'text',
+      required: true,
+    },
+  ],
 }

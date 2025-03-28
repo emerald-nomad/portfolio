@@ -1,5 +1,5 @@
-import withPayload from "@payloadcms/next/withPayload";
-import type { NextConfig } from "next";
+import withPayload from '@payloadcms/next/withPayload'
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -9,10 +9,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         hostname: 'l8vv6jxo8e4sjnrh.public.blob.vercel-storage.com',
-        protocol: "https"
-      }
-    ]
-  }
-};
+        protocol: 'https',
+      },
+    ],
+  },
+}
 
-export default withPayload(nextConfig);
+export default withPayload(nextConfig)

@@ -37,39 +37,39 @@ export const Code: Block = {
   //     ],
   //   }),
   // ],
-    fields: [
+  fields: [
+    {
+      name: 'language',
+      type: 'select',
+      defaultValue: 'none',
+      options: [
         {
-          name: 'language',
-          type: 'select',
-          defaultValue: 'none',
-          options: [
-            {
-              label: 'None',
-              value: 'none',
-            },
-            {
-              label: "C",
-              value: 'c'
-            },
-            {
-              label: 'JavaScript',
-              value: 'js',
-            },
-            {
-              label: 'TypeScript',
-              value: 'ts',
-            },
-            {
-              label: 'Rust',
-              value: 'rust'
-            }
-          ],
+          label: 'None',
+          value: 'none',
         },
         {
-          name: 'code',
-          type: 'code',
-          required: true,
+          label: 'C',
+          value: 'c',
         },
-        // codeBlips,
+        {
+          label: 'JavaScript',
+          value: 'js',
+        },
+        {
+          label: 'TypeScript',
+          value: 'ts',
+        },
+        {
+          label: 'Rust',
+          value: 'rust',
+        },
       ],
+    },
+    {
+      name: 'code',
+      type: 'code',
+      required: true,
+    },
+    // codeBlips,
+  ],
 }

@@ -1,40 +1,46 @@
-import sharp from "sharp";
-import path from "path";
-import { fileURLToPath } from "url";
+import sharp from 'sharp'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import {
   BlocksFeature,
   FixedToolbarFeature,
   lexicalEditor,
-} from "@payloadcms/richtext-lexical";
-import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
+} from '@payloadcms/richtext-lexical'
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-import { buildConfig } from "payload";
-import { ArticlesCollection } from "./collections/Articles";
-import { BlogContent } from "./blocks/BlogContent";
-import { Code } from "./blocks/Code";
-import { MediaCollection } from "./collections/Media";
-import { MediaBlock } from "./blocks/MediaBlock";
-import { migrations } from "../../migrations"
-import { PagesCollection } from "./collections/Pages";
-import { SimpleLayout } from "./blocks/SimpleLayout";
-import { GalleryLayout } from "./blocks/GalleryLayout";
-import { SocialLinksCollection } from "./collections/SocialLinks";
-import { ArticleListWide } from "./blocks/ArticleListWide";
+import { buildConfig } from 'payload'
+import { ArticlesCollection } from './collections/Articles'
+import { BlogContent } from './blocks/BlogContent'
+import { Code } from './blocks/Code'
+import { MediaCollection } from './collections/Media'
+import { MediaBlock } from './blocks/MediaBlock'
+import { migrations } from '../../migrations'
+import { PagesCollection } from './collections/Pages'
+import { SimpleLayout } from './blocks/SimpleLayout'
+import { GalleryLayout } from './blocks/GalleryLayout'
+import { SocialLinksCollection } from './collections/SocialLinks'
+import { ArticleListWide } from './blocks/ArticleListWide'
+import { ArticleListThin } from './blocks/ArticleListThin'
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export default buildConfig({
   // Define and configure your collections in this array
-  collections: [ArticlesCollection, MediaCollection, PagesCollection, SocialLinksCollection],
+  collections: [
+    ArticlesCollection,
+    MediaCollection,
+    PagesCollection,
+    SocialLinksCollection,
+  ],
   globals: [],
   // Your Payload secret - should be a complex and secure string, unguessable
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET || '',
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: vercelPostgresAdapter({
-    migrationDir: "migrations",
-    prodMigrations: migrations
+    migrationDir: 'migrations',
+    prodMigrations: migrations,
   }),
   // If you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.
@@ -42,7 +48,15 @@ export default buildConfig({
   // you don't need it!
   sharp,
   // If you'd like to use Rich Text, pass your editor here
-  blocks: [ArticleListWide, BlogContent, Code, GalleryLayout, MediaBlock, SimpleLayout],
+  blocks: [
+    ArticleListThin,
+    ArticleListWide,
+    BlogContent,
+    Code,
+    GalleryLayout,
+    MediaBlock,
+    SimpleLayout,
+  ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
@@ -57,7 +71,8 @@ export default buildConfig({
       cacheControlMaxAge: 60 * 60 * 24 * 365, // 1 year
       collections: {
         media: {
-          generateFileURL: ({ filename }) => `https://l8vv6jxo8e4sjnrh.public.blob.vercel-storage.com/${filename}`,
+          generateFileURL: ({ filename }) =>
+            `https://l8vv6jxo8e4sjnrh.public.blob.vercel-storage.com/${filename}`,
         },
       },
       enabled: Boolean(process.env.BLOB_STORAGE_ENABLED) || false,
@@ -65,7 +80,6 @@ export default buildConfig({
     }),
   ],
   typescript: {
-    outputFile: path.resolve(dirname, "payload-types.ts"),
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  
-});
+})

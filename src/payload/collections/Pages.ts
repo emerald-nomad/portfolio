@@ -1,55 +1,55 @@
-import { CollectionAfterChangeHook, CollectionConfig } from "payload";
-import { Page } from "../payload-types";
-import { revalidatePage } from "@/actions/revalidatePage";
+import { CollectionAfterChangeHook, CollectionConfig } from 'payload'
+import { Page } from '../payload-types'
+import { revalidatePage } from '@/actions/revalidatePage'
 
 const afterChangeHook: CollectionAfterChangeHook<Page> = async ({ doc }) => {
-  if (doc._status == "published") {
-    await revalidatePage(doc.slug);
+  if (doc._status == 'published') {
+    await revalidatePage(doc.slug)
   }
- 
-  return doc;
+
+  return doc
 }
 
-export const PagesCollection: CollectionConfig<"pages"> = {
-  slug: "pages",
+export const PagesCollection: CollectionConfig<'pages'> = {
+  slug: 'pages',
   admin: {
-    useAsTitle: "name",
+    useAsTitle: 'name',
     livePreview: {
       url: ({ data }) => {
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=${data.slug}`
-      }
+      },
     },
   },
   fields: [
     {
-      name: "name",
-      type: "text",
-      required: true
+      name: 'name',
+      type: 'text',
+      required: true,
     },
     {
-      name: "slug",
-      type: "text",
-      required: true
+      name: 'slug',
+      type: 'text',
+      required: true,
     },
     {
-      name: "content",
+      name: 'content',
       type: 'blocks',
       blocks: [],
       maxRows: 1,
       required: true,
-      blockReferences: ["simpleLayout", "galleryLayout"]
-    }
+      blockReferences: ['simpleLayout', 'galleryLayout'],
+    },
   ],
   versions: {
     drafts: {
-      schedulePublish: true
-    }
+      schedulePublish: true,
+    },
   },
-   access: {
-    read({req, }) {
+  access: {
+    read({ req }) {
       if (req.user) {
-        return true;
-      } 
+        return true
+      }
 
       return {
         or: [
@@ -65,11 +65,9 @@ export const PagesCollection: CollectionConfig<"pages"> = {
           },
         ],
       }
-    }
+    },
   },
   hooks: {
-    afterChange: [
-      afterChangeHook
-    ]
-  }
+    afterChange: [afterChangeHook],
+  },
 }

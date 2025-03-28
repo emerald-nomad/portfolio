@@ -5,7 +5,7 @@ import React from 'react'
 
 export const RefreshRouteOnSave: React.FC = () => {
   const router = useRouter()
-  
+
   return (
     <PayloadLivePreview
       refresh={() => router.refresh()}

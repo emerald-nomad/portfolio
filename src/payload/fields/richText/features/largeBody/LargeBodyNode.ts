@@ -125,6 +125,8 @@ export function $createLargeBodyNode(): LargeBodyNode {
   return $applyNodeReplacement(new LargeBodyNode({}))
 }
 
-export function $isLargeBodyNode(node: LexicalNode | null | undefined): node is LargeBodyNode {
+export function $isLargeBodyNode(
+  node: LexicalNode | null | undefined,
+): node is LargeBodyNode {
   return node instanceof LargeBodyNode
 }

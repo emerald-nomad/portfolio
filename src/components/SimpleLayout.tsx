@@ -1,22 +1,20 @@
-import { SimpleLayout as ISimpleLayout } from "@/payload/payload-types"
+import { SimpleLayout as ISimpleLayout } from '@/payload/payload-types'
 import { Container } from '@/components/Container'
-import { ArticleListWide } from "./ArticleListWide"
+import { ArticleListWide } from './ArticleListWide'
 
 interface SimpleLayoutProps {
   content: ISimpleLayout
 }
 
-export function SimpleLayout({
-  content
-}: SimpleLayoutProps) {
+export function SimpleLayout({ content }: SimpleLayoutProps) {
   function render() {
-    return content.content!.map(c => {
-      switch(c.blockType) {
-        case "articleListWide":
+    return content.content!.map((c) => {
+      switch (c.blockType) {
+        case 'articleListWide':
           return <ArticleListWide key={c.id} content={c} />
         default:
           return <h1>Block type {content.blockType} not supported</h1>
-        }
+      }
     })
   }
   return (

@@ -1,7 +1,7 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig } from 'payload'
 
 export const MediaCollection: CollectionConfig = {
-  slug: "media",
+  slug: 'media',
   fields: [
     {
       name: 'alt',
@@ -13,5 +13,5 @@ export const MediaCollection: CollectionConfig = {
     //   type: 'upload',
     //   relationTo: 'media',
     // }
-  ]
+  ],
 }

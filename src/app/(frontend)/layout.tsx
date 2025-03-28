@@ -1,12 +1,12 @@
-import { Layout } from "@/components/Layout";
-import { Providers } from "@/components/Providers";
+import { Layout } from '@/components/Layout'
+import { Providers } from '@/components/Providers'
 
-import "@/styles/tailwind.css";
+import '@/styles/tailwind.css'
 
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
@@ -18,5 +18,5 @@ export default async function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }

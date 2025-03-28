@@ -19,7 +19,6 @@ export default async function ArticlesPages() {
   //   pagination: true,
   //   limit:1
   // });
-  
 
   return (
     //  <SimpleLayout
@@ -35,7 +34,7 @@ export default async function ArticlesPages() {
     //   </div>
     // </SimpleLayout>
     <></>
-  );
+  )
 }
 
 // function Article({ article }: { article: {

@@ -1,14 +1,25 @@
-import clsx from "clsx"
-import Image from "next/image"
+import clsx from 'clsx'
+import Image from 'next/image'
 
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
+import { GalleryLayout } from '@/payload/payload-types'
 
-export function Photos() {
-  const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+interface PhotoProps {
+  photos: GalleryLayout['photos']
+}
+
+export function Photos({ photos }: PhotoProps) {
+  const rotations = [
+    'rotate-2',
+    '-rotate-2',
+    'rotate-2',
+    'rotate-2',
+    '-rotate-2',
+  ]
 
   return (
     <div className="mt-16 sm:mt-20">

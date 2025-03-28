@@ -39,6 +39,7 @@
     "esbuild-wasm": "^0.25.1",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

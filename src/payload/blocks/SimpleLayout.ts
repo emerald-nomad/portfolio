@@ -1,23 +1,23 @@
-import { Block } from "payload";
+import { Block } from 'payload'
 
 export const SimpleLayout: Block = {
-  slug: "simpleLayout",
+  slug: 'simpleLayout',
   fields: [
     {
-      name: "title",
-      type: "text",
-      required: true
+      name: 'title',
+      type: 'text',
+      required: true,
     },
     {
-      name: "intro",
-      type: "text",
-      required: true
+      name: 'intro',
+      type: 'text',
+      required: true,
     },
     {
-      name: "content",
-      type: "blocks",
+      name: 'content',
+      type: 'blocks',
       blocks: [],
-      blockReferences: ["articleListWide"]
-    }
+      blockReferences: ['articleListWide'],
+    },
   ],
 }

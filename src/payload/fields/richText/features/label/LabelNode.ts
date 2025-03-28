@@ -125,6 +125,8 @@ export function $createLabelNode(): LabelNode {
   return $applyNodeReplacement(new LabelNode({}))
 }
 
-export function $isLabelNode(node: LexicalNode | null | undefined): node is LabelNode {
+export function $isLabelNode(
+  node: LexicalNode | null | undefined,
+): node is LabelNode {
   return node instanceof LabelNode
 }

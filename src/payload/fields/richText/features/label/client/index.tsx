@@ -4,7 +4,10 @@ import {
   getSelectedNode,
   toolbarTextDropdownGroupWithItems,
 } from '@payloadcms/richtext-lexical/client'
-import { $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical'
+import {
+  $getSelection,
+  $isRangeSelection,
+} from '@payloadcms/richtext-lexical/lexical'
 import { $setBlocksType } from '@payloadcms/richtext-lexical/lexical/selection'
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical/utils'
 import { LabelIcon } from '@/payload/fields/richText/features/label/client/icon'
@@ -48,7 +51,10 @@ export const LabelFeatureClient = createClientFeature({
           isActive: ({ selection }) => {
             if ($isRangeSelection(selection)) {
               const selectedNode = getSelectedNode(selection)
-              const labelParent = $findMatchingParent(selectedNode, $isLabelNode)
+              const labelParent = $findMatchingParent(
+                selectedNode,
+                $isLabelNode,
+              )
               return labelParent != null
             }
             return false

@@ -1,29 +1,34 @@
-import { getPayload } from "payload"
-import config from "@/payload/payload.config"
-import { Container } from "@/components/Container";
-import { Newsletter } from "@/components/NewLetter";
-import { Photos } from "@/components/Photos";
-import { Resume } from "@/components/Resume";
-import { XIcon, InstagramIcon, GitHubIcon, LinkedInIcon } from "@/components/SocialIcons";
-import { SocialLink } from "@/components/SocialLink";
-import { Card } from "@/components/Card";
-import { formatDate } from "@/utils/formatDate";
+import { getPayload } from 'payload'
+import config from '@/payload/payload.config'
+import { Container } from '@/components/Container'
+import { Newsletter } from '@/components/NewLetter'
+import { Photos } from '@/components/Photos'
+import { Resume } from '@/components/Resume'
+import {
+  XIcon,
+  InstagramIcon,
+  GitHubIcon,
+  LinkedInIcon,
+} from '@/components/SocialIcons'
+import { SocialLink } from '@/components/SocialLink'
+import { Card } from '@/components/Card'
+import { formatDate } from '@/utils/formatDate'
 
 export default async function Home() {
-  const payload = await getPayload({ config });
-  
-    const {docs: articles} = await payload.find({
-      collection: "articles",
-      select: {
-        title: true,
-        description: true,
-        slug: true,
-        publishedAt: true
-      },
-      sort: ["-publishedAt"],
-      pagination: true,
-      limit: 10,
-    });
+  const payload = await getPayload({ config })
+
+  const { docs: articles } = await payload.find({
+    collection: 'articles',
+    select: {
+      title: true,
+      description: true,
+      slug: true,
+      publishedAt: true,
+    },
+    sort: ['-publishedAt'],
+    pagination: true,
+    limit: 10,
+  })
   return (
     <>
       <Container className="mt-9">
@@ -72,16 +77,20 @@ export default async function Home() {
         </div>
       </Container>
     </>
-  );
+  )
 }
 
-function Article({ article }: { article: {
-    id: number;
-    publishedAt: string;
-    title: string;
-    slug?: string | null | undefined;
-    description: string;
-} }) {
+function Article({
+  article,
+}: {
+  article: {
+    id: number
+    publishedAt: string
+    title: string
+    slug?: string | null | undefined
+    description: string
+  }
+}) {
   return (
     <Card as="article">
       <Card.Title href={`/articles/${article.slug}`}>

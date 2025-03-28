@@ -1,7 +1,7 @@
-import { draftMode } from "next/headers"
-import { redirect } from "next/navigation"
+import { draftMode } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-const previewSecret = process.env.PREVIEW_SECRET;
+const previewSecret = process.env.PREVIEW_SECRET
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -11,9 +11,9 @@ export async function GET(request: Request) {
   if (secret !== previewSecret || !slug) {
     return new Response('Invalid token', { status: 401 })
   }
- 
+
   const draft = await draftMode()
   draft.enable()
 
-  redirect(slug);
+  redirect(slug)
 }

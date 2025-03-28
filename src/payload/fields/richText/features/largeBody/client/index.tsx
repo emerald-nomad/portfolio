@@ -4,7 +4,10 @@ import {
   getSelectedNode,
   toolbarTextDropdownGroupWithItems,
 } from '@payloadcms/richtext-lexical/client'
-import { $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical'
+import {
+  $getSelection,
+  $isRangeSelection,
+} from '@payloadcms/richtext-lexical/lexical'
 import { $setBlocksType } from '@payloadcms/richtext-lexical/lexical/selection'
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical/utils'
 import { LargeBodyIcon } from './icon'
@@ -48,7 +51,10 @@ export const LargeBodyFeatureClient = createClientFeature({
           isActive: ({ selection }) => {
             if ($isRangeSelection(selection)) {
               const selectedNode = getSelectedNode(selection)
-              const largeBodyParent = $findMatchingParent(selectedNode, $isLargeBodyNode)
+              const largeBodyParent = $findMatchingParent(
+                selectedNode,
+                $isLargeBodyNode,
+              )
               return largeBodyParent != null
             }
             return false

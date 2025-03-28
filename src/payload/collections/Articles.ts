@@ -1,39 +1,39 @@
-import type { CollectionAfterChangeHook, CollectionConfig } from "payload";
-import { slugField } from "../fields/slug";
-import { Article } from "../payload-types";
-import { revalidateArticle } from "@/actions/revalidateArticle";
+import type { CollectionAfterChangeHook, CollectionConfig } from 'payload'
+import { slugField } from '../fields/slug'
+import { Article } from '../payload-types'
+import { revalidateArticle } from '@/actions/revalidateArticle'
 
 const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
-  if (doc._status == "published") {
-    await revalidateArticle(doc.slug!);
+  if (doc._status == 'published') {
+    await revalidateArticle(doc.slug!)
   }
- 
-  return doc;
+
+  return doc
 }
 
-export const ArticlesCollection: CollectionConfig<"articles"> = {
-  slug: "articles",
+export const ArticlesCollection: CollectionConfig<'articles'> = {
+  slug: 'articles',
   fields: [
     {
-      name: "publishedAt",
-      type: "date",
-      required: true
+      name: 'publishedAt',
+      type: 'date',
+      required: true,
     },
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
     ...slugField(),
     {
-      name: "description",
-      type: "text",
+      name: 'description',
+      type: 'text',
       required: true,
     },
     {
-      name: "content",
-      type: "blocks",
-      blockReferences: ["blogContent", "code", "mediaBlock"],
+      name: 'content',
+      type: 'blocks',
+      blockReferences: ['blogContent', 'code', 'mediaBlock'],
       blocks: [],
       required: true,
     },
@@ -42,20 +42,20 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
     livePreview: {
       url: ({ data }) => {
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
-      }
+      },
     },
   },
   versions: {
     drafts: {
       autosave: false,
-      schedulePublish: true
+      schedulePublish: true,
     },
   },
   access: {
-    read({req, }) {
+    read({ req }) {
       if (req.user) {
-        return true;
-      } 
+        return true
+      }
 
       return {
         or: [
@@ -71,12 +71,9 @@ export const ArticlesCollection: CollectionConfig<"articles"> = {
           },
         ],
       }
-    }
+    },
   },
   hooks: {
-    afterChange: [
-      afterChangeHook
-    ]
-  }
-};
-
+    afterChange: [afterChangeHook],
+  },
+}

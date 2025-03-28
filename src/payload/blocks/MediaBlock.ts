@@ -1,4 +1,4 @@
-import { Block } from "payload";
+import { Block } from 'payload'
 
 export const MediaBlock: Block = {
   slug: 'mediaBlock',
@@ -13,5 +13,5 @@ export const MediaBlock: Block = {
       name: 'caption',
       type: 'richText',
     },
-  ]
+  ],
 }

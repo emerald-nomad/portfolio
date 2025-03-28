@@ -1,7 +1,7 @@
 import { Block } from 'payload'
 
-export const ArticleListWide: Block = {
-  slug: 'articleListWide',
+export const ArticleListThin: Block = {
+  slug: 'articleListThin',
   fields: [
     {
       name: 'limit',

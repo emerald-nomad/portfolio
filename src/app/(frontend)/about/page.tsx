@@ -1,7 +1,13 @@
-import { Container } from "@/components/Container";
-import { XIcon, InstagramIcon, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/SocialIcons";
-import { SocialLink } from "@/components/SocialLink";
-import Image from "next/image"
+import { Container } from '@/components/Container'
+import {
+  XIcon,
+  InstagramIcon,
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+} from '@/components/SocialIcons'
+import { SocialLink } from '@/components/SocialLink'
+import Image from 'next/image'
 import portraitImage from '@/images/portrait.jpg'
 
 export default function About() {
