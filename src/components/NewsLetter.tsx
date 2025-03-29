@@ -1,4 +1,4 @@
-import {NewsLetter as INewsLetter} from "@/payload/payload-types"
+import { NewsLetter as INewsLetter } from '@/payload/payload-types'
 import { Button } from './Button'
 
 interface NewsLetterProps {
@@ -28,7 +28,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export function Newsletter({content}: NewsLetterProps) {
+export function Newsletter({ content }: NewsLetterProps) {
   return (
     <form
       action="/thank-you"
@@ -39,7 +39,7 @@ export function Newsletter({content}: NewsLetterProps) {
         <span className="ml-3">{content.title}</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-       {content.subTitle}
+        {content.subTitle}
       </p>
       <div className="mt-6 flex">
         <input

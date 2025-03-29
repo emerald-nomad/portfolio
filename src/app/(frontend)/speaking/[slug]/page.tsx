@@ -1,8 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
-import { draftMode } from 'next/headers'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { Container } from '@/components/Container'
+import { draftMode } from 'next/headers'
 
 export const dynamicParams = true
 
@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   const payload = await getPayload({ config })
 
   const { docs } = await payload.find({
-    collection: 'projects',
+    collection: 'talks',
     select: {
       slug: true,
     },
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
   return docs.map((a) => ({ slug: a.slug }))
 }
 
-export default async function ProjectPage({
+export default async function TalkPage({
   params,
 }: {
   params: Promise<{ slug: string }>
@@ -29,12 +29,13 @@ export default async function ProjectPage({
   const { slug } = await params
 
   const { docs } = await payload.find({
-    collection: 'projects',
+    collection: 'talks',
     draft: isEnabled,
     limit: 1,
     where: { slug: { equals: slug } },
   })
-  const project = docs[0]
+
+  const talk = docs[0]
 
   return (
     <>
@@ -45,7 +46,7 @@ export default async function ProjectPage({
             <article>
               <header className="flex flex-col">
                 <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-                  {project.name}
+                  {talk.name}
                 </h1>
               </header>
             </article>

@@ -1,4 +1,7 @@
-import { GalleryLayout as IGalleryLayout, SocialLink as ISocialLInk } from '@/payload/payload-types'
+import {
+  GalleryLayout as IGalleryLayout,
+  SocialLink as ISocialLInk,
+} from '@/payload/payload-types'
 import { Container } from './Container'
 import { ArticleListThin } from './ArticleListThin'
 import { Photos } from './Photos'
@@ -24,11 +27,11 @@ export function GalleryLayout({ content }: GalleryLayoutProps) {
   }
 
   function renderRightSide() {
-    return content.rightSide!.content!.map(c => {
+    return content.rightSide!.content!.map((c) => {
       switch (c.blockType) {
         case 'newsLetter':
           return <Newsletter key={c.id} content={c} />
-        case "resume":
+        case 'resume':
           return <Resume key={c.id} content={c} />
         default:
           return <h1>Block type {content.blockType} not supported</h1>
@@ -36,7 +39,7 @@ export function GalleryLayout({ content }: GalleryLayoutProps) {
     })
   }
 
-  const {socialLinks} = content;
+  const { socialLinks } = content
 
   return (
     <>
@@ -49,31 +52,37 @@ export function GalleryLayout({ content }: GalleryLayoutProps) {
             {content.intro}
           </p>
           <div className="mt-6 flex gap-6">
-            {
-              socialLinks && socialLinks.map(({link, id}) => {
-                const l = link as ISocialLInk;
-                let icon;
+            {socialLinks &&
+              socialLinks.map(({ link, id }) => {
+                const l = link as ISocialLInk
+                let icon
 
                 switch (l.icon) {
-                  case "x":
-                    icon = XIcon;
-                    break;
-                  case "github":
-                    icon = GitHubIcon;
-                    break;
-                  case "instagram":
-                    icon = InstagramIcon;
-                    break;
-                  case "linkedIn":
-                    icon = LinkedInIcon;
-                    break;
+                  case 'x':
+                    icon = XIcon
+                    break
+                  case 'github':
+                    icon = GitHubIcon
+                    break
+                  case 'instagram':
+                    icon = InstagramIcon
+                    break
+                  case 'linkedIn':
+                    icon = LinkedInIcon
+                    break
                   default:
-                    icon = XIcon 
+                    icon = XIcon
                 }
 
-                return <SocialLink key={id} href={l.slug} aria-label="Follow on X" icon={icon} />
-              })
-            }
+                return (
+                  <SocialLink
+                    key={id}
+                    href={l.slug}
+                    aria-label="Follow on X"
+                    icon={icon}
+                  />
+                )
+              })}
           </div>
         </div>
       </Container>

@@ -37,7 +37,7 @@ export default buildConfig({
     PagesCollection,
     ProjectsCollection,
     SocialLinksCollection,
-    TalksCollection
+    TalksCollection,
   ],
   globals: [],
   // Your Payload secret - should be a complex and secure string, unguessable
@@ -63,7 +63,7 @@ export default buildConfig({
     ProjectList,
     Resume,
     SimpleLayout,
-    TalksLists
+    TalksLists,
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

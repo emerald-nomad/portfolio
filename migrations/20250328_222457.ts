@@ -1,4 +1,8 @@
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
+import {
+  MigrateUpArgs,
+  MigrateDownArgs,
+  sql,
+} from '@payloadcms/db-vercel-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
@@ -14,7 +18,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   DROP TYPE "public"."enum__articles_v_blocks_code_language";`)
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({
+  db,
+  payload,
+  req,
+}: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    CREATE TYPE "public"."enum_articles_blocks_code_language" AS ENUM('none', 'c', 'js', 'ts', 'rust');
   CREATE TYPE "public"."enum__articles_v_blocks_code_language" AS ENUM('none', 'c', 'js', 'ts', 'rust');

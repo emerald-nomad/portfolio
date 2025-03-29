@@ -1,4 +1,4 @@
-import {Resume as IResume, Media} from "@/payload/payload-types"
+import { Resume as IResume, Media } from '@/payload/payload-types'
 import Image, { ImageProps } from 'next/image'
 import { ArrowDownIcon, BriefcaseIcon } from './SocialIcons'
 import { Button } from './Button'
@@ -17,20 +17,28 @@ interface RoleProps {
 
 function Role({ content }: RoleProps) {
   const startYear = new Date(content.start).getFullYear().toString()
-  
-  const startLabel = startYear;
+
+  const startLabel = startYear
   const startDate = startYear
 
-  const endYear = (content.end ? new Date(content.end) : new Date()).getFullYear().toString()
-  const endLabel = content.end ? endYear : "Present";
-  const endDate = endYear;
+  const endYear = (content.end ? new Date(content.end) : new Date())
+    .getFullYear()
+    .toString()
+  const endLabel = content.end ? endYear : 'Present'
+  const endDate = endYear
 
-  const icon = (content.icon) as Media;
+  const icon = content.icon as Media
 
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={icon.url!} alt={icon.alt} className="h-7 w-7" width={icon.width!} height={icon.height!} />
+        <Image
+          src={icon.url!}
+          alt={icon.alt}
+          className="h-7 w-7"
+          width={icon.width!}
+          height={icon.height!}
+        />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -59,7 +67,7 @@ interface ResumeProps {
   content: IResume
 }
 
-export function Resume({content}: ResumeProps) {
+export function Resume({ content }: ResumeProps) {
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -68,7 +76,7 @@ export function Resume({content}: ResumeProps) {
       </h2>
       <ol className="mt-6 space-y-4">
         {content.roles.map((role) => (
-          <Role key={role.id} content={role}/>
+          <Role key={role.id} content={role} />
         ))}
       </ol>
       <Button href="#" variant="secondary" className="group mt-6 w-full">

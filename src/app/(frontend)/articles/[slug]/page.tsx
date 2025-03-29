@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string; }>
+  params: Promise<{ slug: string }>
 }) {
   const { isEnabled } = await draftMode()
   const payload = await getPayload({ config })

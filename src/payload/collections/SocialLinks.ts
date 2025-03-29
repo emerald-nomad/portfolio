@@ -3,8 +3,8 @@ import { CollectionConfig } from 'payload'
 export const SocialLinksCollection: CollectionConfig = {
   slug: 'socialLinks',
   admin: {
-    useAsTitle: "text",
-    defaultColumns: ["text", "slug", "icon"],
+    useAsTitle: 'text',
+    defaultColumns: ['text', 'slug', 'icon'],
   },
   fields: [
     {
@@ -18,39 +18,39 @@ export const SocialLinksCollection: CollectionConfig = {
       required: true,
     },
     {
-      name: "icon",
-      type: "select",
+      name: 'icon',
+      type: 'select',
       required: true,
       options: [
         {
-          label: "ArrowDown",
-          value: "arrowDown"
+          label: 'ArrowDown',
+          value: 'arrowDown',
         },
         {
-          label: "Briefcase",
-          value: "briefcase"
+          label: 'Briefcase',
+          value: 'briefcase',
         },
         {
-          label: "Github",
-          value: "github"
+          label: 'Github',
+          value: 'github',
         },
         {
-          label: "Instagram",
-          value: "instagram"
+          label: 'Instagram',
+          value: 'instagram',
         },
         {
-          label: "LinkedIn",
-          value: "linkedIn"
+          label: 'LinkedIn',
+          value: 'linkedIn',
         },
         {
-          label: "Mail",
-          value: "mail"
+          label: 'Mail',
+          value: 'mail',
         },
         {
-          label: "X",
-          value: "x"
-        }
-      ]
-    }
+          label: 'X',
+          value: 'x',
+        },
+      ],
+    },
   ],
 }

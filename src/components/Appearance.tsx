@@ -1,14 +1,13 @@
-import { Card } from "./Card"
+import { Card } from './Card'
 
 interface AppearanceProps {
-    id: number;
-    name: string;
-    slug?: string | null | undefined;
-    description: string;
-    event: string;
-    cta: string;
+  id: number
+  name: string
+  slug?: string | null | undefined
+  description: string
+  event: string
+  cta: string
 }
-
 
 export function Appearance({
   name,

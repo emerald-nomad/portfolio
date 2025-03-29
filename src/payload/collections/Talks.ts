@@ -1,57 +1,56 @@
-import { CollectionAfterChangeHook, CollectionConfig } from "payload";
-import { slugField } from "../fields/slug";
-import { talkTypeOptions } from "@/utils/talkTypeOptions";
-import { Talk } from "../payload-types";
-import { revalidateTalk } from "@/actions/revalidateTalk";
+import { CollectionAfterChangeHook, CollectionConfig } from 'payload'
+import { slugField } from '../fields/slug'
+import { talkTypeOptions } from '@/utils/talkTypeOptions'
+import { Talk } from '../payload-types'
+import { revalidateTalk } from '@/actions/revalidateTalk'
 
 const afterChangeHook: CollectionAfterChangeHook<Talk> = async ({ doc }) => {
   if (doc._status == 'published') {
     await revalidateTalk(doc.slug!)
   }
-  
+
   return doc
 }
 
-
 export const TalksCollection: CollectionConfig = {
-  slug: "talks",
+  slug: 'talks',
   admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "type", "slug"]
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'type', 'slug'],
   },
   fields: [
-     {
+    {
       name: 'publishedAt',
       type: 'date',
       required: true,
     },
     {
-      name: "name",
-      type: "text",
+      name: 'name',
+      type: 'text',
       required: true,
     },
-    ...slugField("name"),
+    ...slugField('name'),
     {
-      name: "description",
-      type: "text",
+      name: 'description',
+      type: 'text',
       required: true,
     },
     {
-      name: "type",
-      type: "select",
+      name: 'type',
+      type: 'select',
       required: true,
-      options: talkTypeOptions
+      options: talkTypeOptions,
     },
     {
-      name: "event",
-      type: "text",
+      name: 'event',
+      type: 'text',
       required: true,
-    }
+    },
   ],
   versions: {
     drafts: {
-      schedulePublish: false
-    }
+      schedulePublish: false,
+    },
   },
   hooks: {
     afterChange: [afterChangeHook],

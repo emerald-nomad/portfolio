@@ -14,7 +14,7 @@ export const PagesCollection: CollectionConfig<'pages'> = {
   slug: 'pages',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ["name", "slug"],
+    defaultColumns: ['name', 'slug'],
     livePreview: {
       url: ({ data }) => {
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=${data.slug}`

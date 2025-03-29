@@ -1,18 +1,16 @@
-import {TalksLists} from "@/payload/payload-types"
-import { SpeakingSection } from "./SpeakingSection"
+import { TalksLists } from '@/payload/payload-types'
+import { SpeakingSection } from './SpeakingSection'
 
 interface TalksListProps {
   content: TalksLists
 }
 
-export function TalksList({content}: TalksListProps) {
+export function TalksList({ content }: TalksListProps) {
   return (
     <div className="space-y-20">
-      {
-        content.sections.map(s => <SpeakingSection key={s.id} content={s} />)
-      }
+      {content.sections.map((s) => (
+        <SpeakingSection key={s.id} content={s} />
+      ))}
     </div>
   )
 }
-
-

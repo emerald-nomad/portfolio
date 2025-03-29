@@ -25,7 +25,7 @@ export const GalleryLayout: Block = {
         },
       ],
     },
-     {
+    {
       name: 'socialLinks',
       type: 'array',
       maxRows: 5,

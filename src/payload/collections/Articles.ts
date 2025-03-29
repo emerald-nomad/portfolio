@@ -14,8 +14,8 @@ const afterChangeHook: CollectionAfterChangeHook<Article> = async ({ doc }) => {
 export const ArticlesCollection: CollectionConfig<'articles'> = {
   slug: 'articles',
   admin: {
-    useAsTitle: "title",
-    defaultColumns: ["title", "slug", "description"],
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'description'],
     livePreview: {
       url: ({ data }) => {
         return `/api/draft?secret=${process.env.PREVIEW_SECRET}&slug=/articles/${data.slug}`
