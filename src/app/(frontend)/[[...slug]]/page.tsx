@@ -29,6 +29,8 @@ export default async function Page({
   const { slug } = await params
   const payload = await getPayload({ config })
 
+  console.log(slug)
+
   const { docs } = await payload.find({
     collection: 'pages',
     limit: 1,

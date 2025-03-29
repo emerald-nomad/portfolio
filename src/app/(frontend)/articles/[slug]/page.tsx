@@ -1,5 +1,4 @@
 import { getPayload } from 'payload'
-// import { RichText } from '@payloadcms/richtext-lexical/react'
 import config from '@/payload/payload.config'
 import { Container } from '@/components/Container'
 import { formatDate } from '@/utils/formatDate'
@@ -27,7 +26,7 @@ export async function generateStaticParams() {
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string; id: string }>
+  params: Promise<{ slug: string; }>
 }) {
   const { isEnabled } = await draftMode()
   const payload = await getPayload({ config })
