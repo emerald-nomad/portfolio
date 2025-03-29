@@ -1,5 +1,14 @@
-import { CollectionConfig } from "payload";
+import { CollectionAfterChangeHook, CollectionConfig } from "payload";
 import { slugField } from "../fields/slug";
+import { Project } from "../payload-types";
+import { revalidateProject } from "@/actions/revalidateProject";
+
+
+const afterChangeHook: CollectionAfterChangeHook<Project> = async ({ doc }) => {
+  await revalidateProject(doc.slug!)
+  
+  return doc
+}
 
 export const ProjectsCollection: CollectionConfig = {
   slug: "projects",
@@ -19,5 +28,8 @@ export const ProjectsCollection: CollectionConfig = {
       type: "text",
       required: true,
     },
-  ]
+  ],
+  hooks: {
+    afterChange: [afterChangeHook],
+  },
 }

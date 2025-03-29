@@ -1,6 +1,17 @@
-import { CollectionConfig } from "payload";
+import { CollectionAfterChangeHook, CollectionConfig } from "payload";
 import { slugField } from "../fields/slug";
 import { talkTypeOptions } from "@/utils/talkTypeOptions";
+import { Talk } from "../payload-types";
+import { revalidateTalk } from "@/actions/revalidateTalk";
+
+const afterChangeHook: CollectionAfterChangeHook<Talk> = async ({ doc }) => {
+  if (doc._status == 'published') {
+    await revalidateTalk(doc.slug!)
+  }
+  
+  return doc
+}
+
 
 export const TalksCollection: CollectionConfig = {
   slug: "talks",
@@ -41,5 +52,8 @@ export const TalksCollection: CollectionConfig = {
     drafts: {
       schedulePublish: false
     }
-  }
+  },
+  hooks: {
+    afterChange: [afterChangeHook],
+  },
 }
