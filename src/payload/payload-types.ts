@@ -72,8 +72,9 @@ export interface Config {
     galleryLayout: GalleryLayout;
     newsLetter: NewsLetter;
     projectList: ProjectList;
-    simpleLayout: SimpleLayout;
     resume: Resume;
+    simpleLayout: SimpleLayout;
+    talksLists: TalksLists;
   };
   collections: {
     articles: Article;
@@ -81,6 +82,7 @@ export interface Config {
     pages: Page;
     projects: Project;
     socialLinks: SocialLink;
+    talks: Talk;
     users: User;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -94,6 +96,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     socialLinks: SocialLinksSelect<false> | SocialLinksSelect<true>;
+    talks: TalksSelect<false> | TalksSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -293,10 +296,25 @@ export interface Project {
 export interface SimpleLayout {
   title: string;
   intro: string;
-  content?: (ArticleListWide | ProjectList)[] | null;
+  content?: (ArticleListWide | ProjectList | TalksLists)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'simpleLayout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "talksLists".
+ */
+export interface TalksLists {
+  sections: {
+    type: 'conference' | 'podcast' | 'meetup';
+    limit: number;
+    sort: 'publishedAt' | '-publishedAt';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'talksLists';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -337,6 +355,23 @@ export interface Page {
   name: string;
   slug: string;
   content: (SimpleLayout | GalleryLayout)[];
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "talks".
+ */
+export interface Talk {
+  id: number;
+  publishedAt: string;
+  name: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  description: string;
+  type: 'conference' | 'podcast' | 'meetup';
+  event: string;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -478,6 +513,10 @@ export interface PayloadLockedDocument {
         value: number | SocialLink;
       } | null)
     | ({
+        relationTo: 'talks';
+        value: number | Talk;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -594,6 +633,22 @@ export interface SocialLinksSelect<T extends boolean = true> {
   icon?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "talks_select".
+ */
+export interface TalksSelect<T extends boolean = true> {
+  publishedAt?: T;
+  name?: T;
+  slug?: T;
+  slugLock?: T;
+  description?: T;
+  type?: T;
+  event?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

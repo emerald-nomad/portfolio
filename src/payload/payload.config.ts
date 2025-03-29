@@ -23,6 +23,8 @@ import { NewsLetter } from './blocks/NewsLetter'
 import { Resume } from './blocks/Resume'
 import { ProjectsCollection } from './collections/Projects'
 import { ProjectList } from './blocks/ProjectList'
+import { TalksCollection } from './collections/Talks'
+import { TalksLists } from './blocks/TalksLists'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,6 +37,7 @@ export default buildConfig({
     PagesCollection,
     ProjectsCollection,
     SocialLinksCollection,
+    TalksCollection
   ],
   globals: [],
   // Your Payload secret - should be a complex and secure string, unguessable
@@ -58,8 +61,9 @@ export default buildConfig({
     GalleryLayout,
     NewsLetter,
     ProjectList,
+    Resume,
     SimpleLayout,
-    Resume
+    TalksLists
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

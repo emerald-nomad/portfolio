@@ -2,6 +2,7 @@ import { SimpleLayout as ISimpleLayout } from '@/payload/payload-types'
 import { Container } from '@/components/Container'
 import { ArticleListWide } from './ArticleListWide'
 import { ProjectList } from './ProjectList'
+import { TalksList } from './TalksList'
 
 interface SimpleLayoutProps {
   content: ISimpleLayout
@@ -15,6 +16,8 @@ export function SimpleLayout({ content }: SimpleLayoutProps) {
           return <ArticleListWide key={c.id} content={c} />
         case 'projectList':
           return <ProjectList key={c.id} content={c} />
+        case 'talksLists':
+          return <TalksList key={c.id} content={c} />
         default:
           // @ts-expect-error check
           return <h1>Block type {c.blockType} not supported</h1>

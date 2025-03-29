@@ -17,7 +17,7 @@ export const SimpleLayout: Block = {
       name: 'content',
       type: 'blocks',
       blocks: [],
-      blockReferences: ['articleListWide', 'projectList'],
+      blockReferences: ['articleListWide', 'projectList', 'talksLists'],
     },
   ],
 }

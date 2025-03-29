@@ -3,7 +3,7 @@ import config from '@/payload/payload.config'
 import { PageBuilder } from '@/components/PageBuilder'
 import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+// import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export const dynamicParams = true
 
@@ -29,8 +29,6 @@ export default async function Page({
   const { slug } = await params
   const payload = await getPayload({ config })
 
-  console.log(slug)
-
   const { docs } = await payload.find({
     collection: 'pages',
     limit: 1,
@@ -50,7 +48,7 @@ export default async function Page({
 
   return (
     <>
-      <RefreshRouteOnSave />
+      {/* <RefreshRouteOnSave /> */}
       <PageBuilder content={page.content[0]} />
     </>
   )
